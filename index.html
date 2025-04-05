@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Orbitron:wght@400;700&family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <title>Komaru</title>
+</head>
+<body>
+
+    <!-- Intro Overlay -->
+    <div id="introOverlay">
+        <div class="trippy-text">ENTER THE VOID</div>
+        <div class="sub-text">Prepare Yourself</div>
+    </div>
+
+    <!-- Stars/Snowflakes Background -->
+    <div class="snowflakes-container"></div>
+
+    <!-- Glowing Box -->
+    <div class="container">
+        <div class="box">
+            <h2>Levicool</h2>
+            <p>landin is fat asf...</p>
+
+            <!-- Profile Picture -->
+            <img src="assets/images/pfp.jpg" alt="PFP" class="pfp">
+
+            <!-- Discord Button (Redirects to add me on disc) -->
+            <a href="https://soundcloud.com/levi-short-896449604" target="_blank">
+                <button class="glow-button"><i class="fa-brands fa-soundcloud"></i> SoundCloud</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/audio/music/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- JavaScript -->
+    <script>
+        // Generate Falling Snowflakes
+        function snowflakes() {
+            let e = document.createElement('div');
+            e.setAttribute('class', 'snowflake');
+            document.querySelector('.snowflakes-container').appendChild(e);
+
+            e.style.left = Math.random() * innerWidth + 'px';
+
+            let size = Math.random() * 12 + 5;
+            let duration = Math.random() * 3 + 3;
+
+            e.style.fontSize = size + 'px';
+            e.style.animationDuration = duration + 's';
+
+            setTimeout(() => e.remove(), 6000);
+        }
+        setInterval(snowflakes, 100);
+
+        // Play Music & Fade Out Overlay
+        window.addEventListener("load", () => {
+        const overlay = document.getElementById("introOverlay");
+        const audio = document.getElementById("background-music");
+
+        // Set up click event to play the music and trigger fade-out
+        document.body.addEventListener("click", () => {
+            audio.play().catch(err => console.log("Autoplay blocked:", err));
+
+            // Fade out overlay immediately after the click
+            overlay.classList.add("fade-out");
+            
+            // Add zoom effect after a slight delay, right after the fade starts
+            setTimeout(() => {
+                document.body.classList.add("zoom-in");
+            }, 100); // A shorter delay to ensure the fade starts immediately
+
+        });
+    });
+
+    </script>
+
+</body>
+</html>
